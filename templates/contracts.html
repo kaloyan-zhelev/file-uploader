@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block active_contracts %}active{% endblock %}
+{% block body %}
+    <header class="main-header">
+        <h1>Договори</h1>
+    </header>
+    <div class="main-content">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>Създаден</th>
+                <th>Обновен</th>
+                <th>Валута</th>
+                <th>Срок</th>
+                <th>Емайл</th>
+                <th>Създаден от</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for contract in contracts %}
+                    <tr>
+                        <td>{{ contract.id }}</td>
+                        <td>{{ contract.created_at }}</td>
+                        <td>{{ contract.updated_at }}</td>
+                        <td>{{ contract.currency_type }}</td>
+                        <td>{{ contract.expiration_date }}</td>
+                        <td>{{ contract.client_email }}</td>
+                        <td>{{ contract.user.username }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock body %}

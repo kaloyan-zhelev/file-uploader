@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block active_create %}active{% endblock %}
+{% block body %}
+    <main class="applications">
+        <header class="main-header">
+            <h1>Качване на файл</h1>
+        </header>
+        <div class="main-content">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <input class="form-control" name="file" type="file" id="{{ form.file.id_for_label }}">
+                </div>
+                <button type="submit" class="btn btn-primary">Качи</button>
+                <a class="btn btn-success" href="{% url 'download_template' %}">Свали темплейт</a>
+            </form>
+        </div>
+    </main>
+{% endblock %}

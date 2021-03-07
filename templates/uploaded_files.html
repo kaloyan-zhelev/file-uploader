@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block active_index %}active{% endblock %}
+{% block body %}
+    <main class="applications">
+        {% if user.is_authenticated %}
+            <header class="main-header">
+                <h1>Качени файлове</h1>
+            </header>
+            <div class="main-content">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Качен на</th>
+                        <th>Име на файла</th>
+                        <th>Качен от</th>
+                        <th> </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for upload in uploads %}
+                            <tr>
+                                <td>{{ upload.id }}</td>
+                                <td>{{ upload.created_at.date }}</td>
+                                <td>{{ upload.file_name }}</td>
+                                <td>{{ upload.user.username }}</td>
+                                <td>
+                                    {% if not upload.status %}
+                                        <a class="btn btn-primary" href="{% url 'apply_upload' upload.id %}">
+                                            Създай записи
+                                        </a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <a class="btn btn-primary" href="{% url 'signup' %}">Вход</a>
+        {% endif %}
+    </main>
+{% endblock %}
